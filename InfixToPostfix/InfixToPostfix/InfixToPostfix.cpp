@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include "equationConverter.h"
 
 int main()
 {

@@ -18,5 +18,13 @@
     <ClCompile Include="InfixToPostfix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="equationConverter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="equationConverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
