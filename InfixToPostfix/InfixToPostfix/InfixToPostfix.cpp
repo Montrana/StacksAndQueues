@@ -6,7 +6,25 @@
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    cout << "Enter equation to be converted or press Enter when done\n";
+    string equation;
+    while (getline(cin, equation))
+    {
+        if (equation == "")
+        {
+            break;
+        }
+        try
+        {
+            string result = convertToPostfix(equation);
+            cout << "== " << result << endl;
+        }
+        catch(runtime_error err)
+        {
+            cout << "Error: " << err.what() << endl;
+        }
+        cout << "Enter next equation: ";
+    }
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

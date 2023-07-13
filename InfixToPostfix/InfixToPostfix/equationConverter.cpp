@@ -1,55 +1,95 @@
 #include "equationConverter.h"
 using namespace std;
 
-string getInput()
+stack<char> operatorStack;
+string postfix = "";
+
+bool isOperator(char ch)
 {
-	return string();
+	return OPERATORS.find(ch) != string::npos;
 }
 
-bool isOpen(char ch)
+int getPrecedence(char op)
 {
-	return OPEN.find(ch) != string::npos;
+	return PRECEDENCE[OPERATORS.find(op)];
 }
 
-bool isClose(char ch)
+void processOperator(char op)
 {
-	return CLOSE.find(ch) != string::npos;
-}
-
-
-
-bool isBalanced(string equation)
-{
-	stack<char> brackets;
-	for(string::const_iterator iter = equation.begin(); iter != equation.end();
-		iter++)
+	if (operatorStack.empty() || (op == '('))
 	{
-		char next = *iter;
-		if (isOpen(next))
+		if (op == ')')
 		{
-			brackets.push(next);
+			throw runtime_error("Unmatched close parenthesis");
 		}
-		else if (isClose(next))
+		operatorStack.push(op);
+	}
+	else
+	{
+		if (getPrecedence(op) > getPrecedence(operatorStack.top()))
 		{
-			if (brackets.empty())
+			operatorStack.push(op);
+		}
+		else
+		{
+			while (!operatorStack.empty() 
+				&& operatorStack.top() != '('
+				&& getPrecedence(op) <= getPrecedence(operatorStack.top()))
 			{
-				return false;
+				postfix += operatorStack.top();
+				postfix += " ";
+				operatorStack.pop();
+			}
+			if (op == ')')
+			{
+				if(!operatorStack.empty() 
+					&& operatorStack.top() == '(')
+				{
+					operatorStack.pop();
+				}
+				else
+				{
+					throw runtime_error("Unmatched close parenthesis");
+				}
 			}
 			else
 			{
-				char top = brackets.top();
-				brackets.pop();
-				if (OPEN.find(top) != CLOSE.find(next))
-				{
-					return false;
-				}
+				operatorStack.push(op);
 			}
 		}
 	}
-	return true;
 }
 
-string convertToPostfix(string equation, bool& result)
+string convertToPostfix(string infix)
 {
-	return string();
+	istringstream infixItems(infix);
+	string nextItem;
+	postfix = "";
+	while (!operatorStack.empty())
+	{
+		operatorStack.pop();
+	}
+	while (infixItems >> nextItem)
+	{
+		if (isalnum(nextItem[0]))
+		{
+			postfix += nextItem;
+			postfix += " ";
+		}
+		else if (isOperator(nextItem[0]))
+		{
+			processOperator(nextItem[0]);
+		}
+		else
+		{
+			throw runtime_error("Unexpected Character Encountered " + nextItem[0]);
+		}
+	}
+	while (!operatorStack.empty())
+	{
+		postfix += operatorStack.top();
+		postfix += " ";
+		operatorStack.pop();
+	}
+	return postfix;
 }

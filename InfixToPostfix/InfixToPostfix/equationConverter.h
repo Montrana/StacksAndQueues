@@ -1,13 +1,17 @@
 #pragma once
 #include <stack>
 #include <string>
+#include <sstream>
 using namespace std;
 
 const string OPEN = "([{";
 const string CLOSE = ")]}";
 
-string getInput();
-bool isOpen(char ch);
-bool isClose(char ch);
-bool isBalanced(string input);
-string convertToPostfix(string equation, bool& result);
+const string OPERATORS = "+-*/([{)]}";
+const int PRECEDENCE[] = {1, 1, 2, 2};
+
+bool isOperator(char ch);
+int getPrecedence(char op);
+void processOperator(char op);
+
+string convertToPostfix(string equation);
