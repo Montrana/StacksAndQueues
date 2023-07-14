@@ -1,4 +1,6 @@
 # StacksAndQueues
+Name: Montana Nicholson
+Date: July 8th, 2023
 Infix to postfix:
 This solution converts a valid infix equation to postfix 
 space out all operators like so: ( 9 + 3 ) * 5
