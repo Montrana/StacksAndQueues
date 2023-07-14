@@ -1,5 +1,6 @@
 // QueueImplementation.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+// Name: Montana Nicholson
+// Date: July 8th, 2023
 
 #include <iostream>
 #include "queue.cpp"
