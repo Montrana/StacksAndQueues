@@ -2,10 +2,31 @@
 //
 
 #include <iostream>
+#include "queue.cpp"
+using namespace std;
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    queue<int> ints;
+
+    ints.push(15);
+    ints.push(52);
+    cout << ints.count() << endl;
+    if (ints.isEmpty())
+    {
+        cout << "Queue is Empty\n";
+    }
+    cout << ints.front() << endl;
+    ints.push(27);
+    cout << ints.popReturn() << endl;
+    ints.pop();
+    ints.push(31);
+    cout << ints.popReturn() << endl;
+    cout << ints.popReturn() << endl;
+    if (ints.isEmpty())
+    {
+        cout << "Queue is Empty\n";
+    }
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

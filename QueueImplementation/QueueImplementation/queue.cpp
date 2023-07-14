@@ -23,7 +23,7 @@ void queue<Type>::pop() {
 }
 
 template<typename Type>
-Type queue<Type>::popFront()
+Type queue<Type>::popReturn()
 {
 	Type item = l.front();
 	l.pop_front();
@@ -34,7 +34,14 @@ Type queue<Type>::popFront()
 template<typename Type>
 bool queue<Type>::isEmpty()
 {
-	return (numItems == 0) ? true : false;
+	if(numItems == 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 template<typename Type>
